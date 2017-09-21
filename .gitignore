@@ -1,2 +1,12 @@
 *.db
 *.opendb
+*.obj
+*.pch
+*.ipch
+*.idb
+*.pdb
+*.exe
+*.ilk
+*.tlog
+*.log
+*.suo

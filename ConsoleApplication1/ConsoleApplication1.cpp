@@ -1,10 +1,12 @@
 // ConsoleApplication1.cpp : 定义控制台应用程序的入口点。
 //
 
-#include "stdafx.h"
+//#include "stdafx.h"
 #ifdef _WIN32
 #include <windows.h>
 #include <iostream>
+#include <fstream>
+#include <vector>
 #include <string>
 #include <map>
 #include <stdlib.h>
@@ -138,7 +140,38 @@ void ScissorFrameBuffer(std::tr1::shared_ptr<unsigned char> frame)
 
 void main(int argc, TCHAR *argv[])
 {
-
+	ifstream infile("C:/Users/qwer/Desktop/face.obj");
+	std::vector<float> v;
+	float maxValue = 0, minValue = 10;
+	if (infile)
+	{
+		float tmp;
+		std::string str;
+		while (!infile.eof())
+		{
+			infile >> str;			
+			if (str == "v")
+			{
+				infile >> tmp;
+				infile >> tmp;
+				v.push_back(tmp);
+			}			
+		}
+		printf("push complete\n");
+	}
+	else
+	{
+		printf("no such file\n");
+	}
+	auto it = v.begin();
+	for (auto _end = v.end();it!=_end;it++)
+	{
+		maxValue = max(maxValue, *it);
+		minValue = min( *it,minValue);
+	}
+	printf("maxValue :%f ", maxValue);
+	printf("minValue: %f \n", minValue);
+	infile.close();
 	system("pause");
 }
 
