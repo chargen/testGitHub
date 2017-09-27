@@ -12,11 +12,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <memory>
+
+#include "shadwomap.h"
 #endif // _WIN32
 //#include "Common/b3Vector3.h"
 //#include "Common/b3Matrix3x3.h"
 //#include "duktape/duk_config.h"
-#include "duktape/duktape.h"
+//#include "duktape/duktape.h"
 #ifdef _WIN32
 using namespace std;
 #endif // _WIN32
@@ -138,9 +140,9 @@ void ScissorFrameBuffer(std::tr1::shared_ptr<unsigned char> frame)
 	}
 }
 
-void main(int argc, TCHAR *argv[])
+void readObj(string obj_path)
 {
-	ifstream infile("C:/Users/qwer/Desktop/face.obj");
+	ifstream infile(obj_path);
 	std::vector<float> v;
 	float maxValue = 0, minValue = 10;
 	if (infile)
@@ -149,13 +151,13 @@ void main(int argc, TCHAR *argv[])
 		std::string str;
 		while (!infile.eof())
 		{
-			infile >> str;			
+			infile >> str;
 			if (str == "v")
 			{
 				infile >> tmp;
 				infile >> tmp;
 				v.push_back(tmp);
-			}			
+			}
 		}
 		printf("push complete\n");
 	}
@@ -164,14 +166,41 @@ void main(int argc, TCHAR *argv[])
 		printf("no such file\n");
 	}
 	auto it = v.begin();
-	for (auto _end = v.end();it!=_end;it++)
+	for (auto _end = v.end(); it != _end; it++)
 	{
 		maxValue = max(maxValue, *it);
-		minValue = min( *it,minValue);
+		minValue = min(*it, minValue);
 	}
 	printf("maxValue :%f ", maxValue);
 	printf("minValue: %f \n", minValue);
 	infile.close();
+}
+
+void getFov(float * projmtx)
+{
+	float t = projmtx[5];
+	float Rad2Deg = (float)180.0 / (float)Math.PI;
+	float fov = (float)Math.atan(1.0f / t) * 2.0f * Rad2Deg;
+
+	float m22 = -projmtx[10];
+	float m32 = -projmtx[14];
+
+	float nearPlane = (2.0f*m32) / (2.0f*m22 - 2.0f);
+	float farPlane = ((m22 - 1.0f)*nearPlane) / (m22 + 1.0f);
+	//                Log.i(TAG, "onDrawFrame: fov"+fov+"  near: :"+near+"  far: "+far);
+}
+
+void main(int argc, char *argv[])
+{
+	//glutInit(&argc, argv);
+	//glutInitWindowSize(800, 800);
+	//glutInitDisplayMode(GLUT_RGB | GLUT_DEPTH);
+	//int window = glutCreateWindow("SHADERTEST");
+	//glutKeyboardFunc(&ProcessKeyboard);
+	//InitScene();
+	//glutDisplayFunc(display);
+	//glutMainLoop();
+	readObj("C:\\Users\\qwer\\Desktop\\andy.obj");
 	system("pause");
 }
 

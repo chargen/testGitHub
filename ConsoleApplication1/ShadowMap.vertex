@@ -1,0 +1,26 @@
+varying vec3 normal ;
+varying vec4 lightVertex ;
+varying vec4 color ;
+varying vec4 worldCoord ;
+uniform mat4 lightProj;
+uniform mat4 lightView;
+uniform vec4 lightPos ;
+uniform vec4 lightLambert ;
+uniform vec4 lightAmbient ;
+
+const  mat4 biasMatrix = mat4(0.5 , 0.0 , 0.0 , 0.0 ,
+                       0.0 , 0.5 , 0.0 , 0.0 ,
+                       0.0 , 0.0 , 0.5 , 0.0 ,
+                       0.5 , 0.5 , 0.5 , 1.0 ) ;
+void main()
+{
+     worldCoord = gl_ModelViewMatrix * gl_Vertex ;
+     normal =  normalize(gl_NormalMatrix * gl_Normal);
+    lightVertex = lightProj * lightView * worldCoord ;
+    lightVertex = lightVertex / lightVertex.w ;
+    lightVertex = biasMatrix * lightVertex ;
+    //lightVertex = lightVertex / lightVertex.w ;
+    gl_TexCoord[0] = gl_MultiTexCoord0 ;
+    color = gl_Color ;
+    gl_Position =  gl_ProjectionMatrix * gl_ModelViewMatrix * gl_Vertex ;
+}

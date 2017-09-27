@@ -16,6 +16,12 @@
     <Filter Include="源文件\duktape">
       <UniqueIdentifier>{76af78f4-ea17-48dd-bffa-7cba48e70798}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\opengl">
+      <UniqueIdentifier>{ee461128-f7ba-476d-bc4c-2708df77e872}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\opengl">
+      <UniqueIdentifier>{3fe574d9-af5c-4122-a584-34eb91a0df26}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -33,6 +39,21 @@
     <ClInclude Include="duktape\duktape.h">
       <Filter>源文件\duktape</Filter>
     </ClInclude>
+    <ClInclude Include="opengl\glxew.h">
+      <Filter>头文件\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="opengl\wglew.h">
+      <Filter>头文件\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="opengl\glew.h">
+      <Filter>头文件\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="shadwomap.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="LoardShaderProgram.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -44,10 +65,19 @@
     <ClCompile Include="duktape\duktape.c">
       <Filter>源文件\duktape</Filter>
     </ClCompile>
+    <ClCompile Include="opengl\glew.c">
+      <Filter>源文件\opengl</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="duktape\duk_source_meta.json">
       <Filter>源文件\duktape</Filter>
+    </None>
+    <None Include="ShadowMap.vertex">
+      <Filter>头文件</Filter>
+    </None>
+    <None Include="ShadowMap.frag">
+      <Filter>头文件</Filter>
     </None>
   </ItemGroup>
 </Project>
